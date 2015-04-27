@@ -101,8 +101,12 @@ public:
 	    return env.make_ite(args[0],args[1],args[2]);
 	  }
 	  throw std::string("Unknown function ")+head->val;
+        default:
+          throw std::string("Expected function name, not list");
 	}
       }
+    default:
+      throw std::string("Invalid sexpr type");
     }
   }
   typename SMTLibEnv::type parse_type(sexp_t* t) {
@@ -114,6 +118,10 @@ public:
       if(strcmp("Int",t->val)==0) {
 	return env.int_type();
       }
+      throw std::string("Unknown type ")+t->val;
+
+    default:
+      throw std::string("Expected type, not list");
     }
   }
 };
