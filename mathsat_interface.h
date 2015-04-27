@@ -10,6 +10,7 @@ public:
   typedef msat_term term;
   typedef msat_type type;
   typedef msat_decl decl;
+  class model_iterator;
   IMathSAT(const char* logic);
   ~IMathSAT();
   type bool_type();
@@ -38,4 +39,14 @@ public:
   void push();
   void pop();
   bool check_sat();
+  model_iterator create_model_iterator();
+
+  class model_iterator {
+    msat_model_iterator it_;
+  public:
+    model_iterator(msat_model_iterator it);
+    ~model_iterator();
+    bool has_next();
+    void next(term*t,term*v);
+  };
 };
