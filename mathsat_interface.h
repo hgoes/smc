@@ -32,6 +32,7 @@ public:
   term make_gt(term t1,term t2);
   term make_geq(term t1,term t2);
   term make_plus(const std::vector<term>& args);
+  term make_times(term t1,term t2);
   std::string term_to_string(term t);
   void assert(term t);
   void push();

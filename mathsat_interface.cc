@@ -132,6 +132,10 @@ IMathSAT::term IMathSAT::make_plus(const std::vector<IMathSAT::term>& args) {
   }
 }
 
+IMathSAT::term IMathSAT::make_times(IMathSAT::term t1,IMathSAT::term t2) {
+  return msat_make_times(env,t1,t2);
+}
+
 IMathSAT::term IMathSAT::make_ite(IMathSAT::term c,IMathSAT::term t,IMathSAT::term f) {
   return msat_make_term_ite(env,c,t,f);
 }

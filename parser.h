@@ -93,6 +93,9 @@ public:
 	  if(strcmp("+",head->val)==0) {
 	    return env.make_plus(args);
 	  }
+	  if(strcmp("*",head->val)==0) {
+	    return env.make_times(args[0],args[1]);
+	  }
 	  if(strcmp("ite",head->val)==0) {
 	    argument_check("ite",3,args);
 	    return env.make_ite(args[0],args[1],args[2]);
