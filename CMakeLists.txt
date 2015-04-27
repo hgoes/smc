@@ -18,7 +18,7 @@ add_library(sexpr
 
 add_executable(bmc main.cc bmc_exercise.cc mathsat_interface.cc parser.cc program.cc)
 target_link_libraries(bmc ${MATHSAT_LIBRARY} ${GMP_LIBRARY} sexpr)
-SET(CMAKE_CXX_FLAGS "-std=c++0x")
+SET(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wno-sign-compare")
 
 include_directories(${MATHSAT_INCLUDE_DIR})
 include_directories(sexpr-1.3/src)
