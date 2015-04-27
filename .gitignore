@@ -1,0 +1,9 @@
+# cmake files
+/Makefile
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+
+# targets
+/bmc
+/libsexpr.a
