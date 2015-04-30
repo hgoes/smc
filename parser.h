@@ -93,13 +93,20 @@ public:
 	  if(strcmp("+",head->val)==0) {
 	    return env.make_plus(args);
 	  }
+	  if(strcmp("*",head->val)==0) {
+	    return env.make_times(args[0],args[1]);
+	  }
 	  if(strcmp("ite",head->val)==0) {
 	    argument_check("ite",3,args);
 	    return env.make_ite(args[0],args[1],args[2]);
 	  }
 	  throw std::string("Unknown function ")+head->val;
+        default:
+          throw std::string("Expected function name, not list");
 	}
       }
+    default:
+      throw std::string("Invalid sexpr type");
     }
   }
   typename SMTLibEnv::type parse_type(sexp_t* t) {
@@ -111,6 +118,10 @@ public:
       if(strcmp("Int",t->val)==0) {
 	return env.int_type();
       }
+      throw std::string("Unknown type ")+t->val;
+
+    default:
+      throw std::string("Expected type, not list");
     }
   }
 };

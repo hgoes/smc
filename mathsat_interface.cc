@@ -1,7 +1,10 @@
 #include "mathsat_interface.h"
 
+#include <iostream>
+
 IMathSAT::IMathSAT(const char* logic) {
   cfg = msat_create_default_config(logic);
+  msat_set_option(cfg, "model_generation", "true");
   env = msat_create_env(cfg);
 }
 
@@ -132,6 +135,10 @@ IMathSAT::term IMathSAT::make_plus(const std::vector<IMathSAT::term>& args) {
   }
 }
 
+IMathSAT::term IMathSAT::make_times(IMathSAT::term t1,IMathSAT::term t2) {
+  return msat_make_times(env,t1,t2);
+}
+
 IMathSAT::term IMathSAT::make_ite(IMathSAT::term c,IMathSAT::term t,IMathSAT::term f) {
   return msat_make_term_ite(env,c,t,f);
 }
@@ -172,4 +179,29 @@ bool IMathSAT::check_sat() {
   default:
     throw std::string("Unknown SAT query result.");
   }
+}
+
+IMathSAT::model_iterator IMathSAT::create_model_iterator() {
+  return IMathSAT::model_iterator(msat_create_model_iterator(env));
+}
+
+IMathSAT::model_iterator::model_iterator(msat_model_iterator it)
+: it_(it) {
+  if (MSAT_ERROR_MODEL_ITERATOR(it_))
+    std::cerr << "Error retrieving model iterator" << std::endl;
+}
+
+IMathSAT::model_iterator::~model_iterator() {
+  msat_destroy_model_iterator(it_);
+}
+
+bool IMathSAT::model_iterator::has_next() {
+  if (MSAT_ERROR_MODEL_ITERATOR(it_))
+      return false;
+  return msat_model_iterator_has_next(it_);
+}
+
+void IMathSAT::model_iterator::next(term*t,term*v) {
+  if (msat_model_iterator_next(it_,t,v) != 0)
+    throw std::string("msat_model_iterator_next error");
 }
