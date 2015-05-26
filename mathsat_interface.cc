@@ -205,3 +205,23 @@ void IMathSAT::model_iterator::next(term*t,term*v) {
   if (msat_model_iterator_next(it_,t,v) != 0)
     throw std::string("msat_model_iterator_next error");
 }
+
+IMathSAT::interp_group IMathSAT::create_interp_group() {
+  interp_group grp = msat_create_itp_group(env);
+  if(grp==-1) throw std::string("msat_create_itp_group failed.");
+  return grp;
+}
+
+void IMathSAT::set_interp_group(IMathSAT::interp_group grp) {
+  if(msat_set_itp_group(env,grp)!=0) throw std::string("msat_set_interp_group failed.");
+}
+
+IMathSAT::term IMathSAT::interpolate(const std::vector<IMathSAT::interp_group>& grps) {
+  int* cgrps = new int[grps.size()];
+  for(std::size_t i=0;i<grps.size();++i) {
+    cgrps[i] = grps[i];
+  }
+  IMathSAT::term res = msat_get_interpolant(env,cgrps,grps.size());
+  delete[] cgrps;
+  return res;
+}

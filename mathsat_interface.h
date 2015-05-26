@@ -10,6 +10,7 @@ public:
   typedef msat_term term;
   typedef msat_type type;
   typedef msat_decl decl;
+  typedef int interp_group;
   class model_iterator;
   IMathSAT(const char* logic);
   ~IMathSAT();
@@ -39,6 +40,9 @@ public:
   void push();
   void pop();
   bool check_sat();
+  interp_group create_interp_group();
+  void set_interp_group(interp_group grp);
+  term interpolate(const std::vector<interp_group>& grps);
   model_iterator create_model_iterator();
 
   class model_iterator {
