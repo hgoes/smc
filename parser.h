@@ -100,6 +100,10 @@ public:
 	    argument_check("ite",3,args);
 	    return env.make_ite(args[0],args[1],args[2]);
 	  }
+	  if(strcmp("-",head->val)==0) {
+	    argument_check("-",2,args);
+	    return env.make_minus(args[0],args[1]);
+	  }
 	  throw std::string("Unknown function ")+head->val;
         default:
           throw std::string("Expected function name, not list");

@@ -144,6 +144,10 @@ IMathSAT::term IMathSAT::make_ite(IMathSAT::term c,IMathSAT::term t,IMathSAT::te
   return msat_make_term_ite(env,c,t,f);
 }
 
+IMathSAT::term IMathSAT::make_minus(IMathSAT::term x,IMathSAT::term y) {
+  return msat_make_plus(env,x,msat_make_times(env,y,msat_make_number(env,"-1")));
+}
+
 IMathSAT::type IMathSAT::bool_type() {
   return msat_get_bool_type(env);
 }
