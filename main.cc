@@ -22,7 +22,28 @@ int main(int argc,char* argv[]) {
 	return 1;
       }
     }
+    IMathSAT::term reach;
+    IMathSAT::term new_reach;
+    check_result result;
+    bmc.extend();
+    if(bmc.check(nullptr,&reach)==INCOMPLETE) {
+      std::cout << "Error found." << std::endl;
+      return 1;
+    }
     std::cout << "No error found." << std::endl;
+    while(true) {
+      switch(bmc.check(&reach,&new_reach)) {
+      case INCOMPLETE:
+	std::cout << "(Not complete)" << std::endl;
+	return 2;
+      case COMPLETE:
+	std::cout << "(Complete)" << std::endl;
+	return 0;
+      default:
+	reach = new_reach;
+	break;
+      }
+    }
     return 0;
   } catch(std::string msg) {
     std::cerr << "Internal error: " << msg << std::endl;

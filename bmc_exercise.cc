@@ -3,7 +3,8 @@
 void BMC::alloc_state(BMC::state& st,int n) {
 }
 
-void BMC::init_state(BMC::state& st) {
+IMathSAT::term BMC::init_state(BMC::state& st) {
+  return iface.make_false();
 }
 
 void BMC::transition(BMC::state& from,BMC::state& to) {
@@ -20,4 +21,8 @@ void BMC::extend() {
 
 bool BMC::check() {
   return false;
+}
+
+check_result BMC::check(IMathSAT::term* reach,IMathSAT::term* new_reach) {
+  return INCOMPLETE;
 }
