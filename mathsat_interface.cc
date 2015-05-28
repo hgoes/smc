@@ -5,6 +5,7 @@
 IMathSAT::IMathSAT(const char* logic) {
   cfg = msat_create_default_config(logic);
   msat_set_option(cfg, "model_generation", "true");
+  msat_set_option(cfg, "interpolation", "true");
   env = msat_create_env(cfg);
 }
 
