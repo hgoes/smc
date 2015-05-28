@@ -230,3 +230,28 @@ IMathSAT::term IMathSAT::interpolate(const std::vector<IMathSAT::interp_group>& 
   delete[] cgrps;
   return res;
 }
+
+IMathSAT::term IMathSAT::translate_term(IMathSAT::term t,std::map<IMathSAT::decl,IMathSAT::decl>& translation) {
+  if(msat_term_is_true(env,t) ||
+     msat_term_is_false(env,t) ||
+     msat_term_is_number(env,t)) {
+    return t;
+  }
+  const size_t num_args = msat_term_arity(t);
+  IMathSAT::decl d = msat_term_get_decl(t);
+  if(num_args==0) {
+    // Variable
+    IMathSAT::decl nd = translation[d];
+    return msat_make_constant(env,nd);
+  } else {
+    IMathSAT::term nargs[num_args];
+    for(size_t i=0; i<num_args; ++i) {
+      nargs[i] = translate_term(msat_term_get_arg(t,i),translation);
+    }
+    return msat_make_term(env,d,nargs);
+  }
+}
+
+bool operator<(const IMathSAT::decl x,const IMathSAT::decl y) {
+  return msat_decl_id(x)<msat_decl_id(y);
+}

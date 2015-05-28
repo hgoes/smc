@@ -2,6 +2,7 @@
 #include <mathsat.h>
 #include <vector>
 #include <string>
+#include <map>
 
 class IMathSAT {
   msat_config cfg;
@@ -44,6 +45,7 @@ public:
   interp_group create_interp_group();
   void set_interp_group(interp_group grp);
   term interpolate(const std::vector<interp_group>& grps);
+  term translate_term(term t,std::map<decl,decl>& translation);
   model_iterator create_model_iterator();
 
   class model_iterator {
@@ -55,3 +57,5 @@ public:
     void next(term*t,term*v);
   };
 };
+
+bool operator<(const IMathSAT::decl,const IMathSAT::decl);
