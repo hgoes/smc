@@ -241,7 +241,12 @@ IMathSAT::term IMathSAT::translate_term(IMathSAT::term t,std::map<IMathSAT::decl
   IMathSAT::decl d = msat_term_get_decl(t);
   if(num_args==0) {
     // Variable
-    IMathSAT::decl nd = translation[d];
+    IMathSAT::decl nd;
+    if (translation.find(d) != translation.end()) {
+      nd = translation[d];
+    } else {
+      throw std::string("No translation mapping for variable: " + term_to_string(t));
+    }
     return msat_make_constant(env,nd);
   } else {
     IMathSAT::term nargs[num_args];
