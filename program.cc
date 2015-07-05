@@ -51,7 +51,13 @@ void Program::parse_expression(sexp_t* expr) {
 	props.push_back(cur_prop);
 	cur_prop = cur_prop->next;
       }
-    } else {
+    } else if(strcmp("predicate",item->list->val)==0) {
+      sexp_t* cur_pred = item->list->next;
+      while(cur_pred!=NULL) {
+	preds.push_back(cur_pred);
+	cur_pred = cur_pred->next;
+      }
+    }else {
       throw std::string("Unknown item in program: ")+item->list->val;
     }
     item = item->next;

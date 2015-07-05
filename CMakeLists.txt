@@ -16,7 +16,7 @@ add_library(sexpr
   sexpr-1.3/src/sexp_memory.c
   sexpr-1.3/src/event_temp.c)
 
-add_executable(bmc main.cc bmc_exercise.cc mathsat_interface.cc parser.cc program.cc)
+add_executable(bmc main.cc pred_abs_exercise.cc bmc_exercise.cc mathsat_interface.cc parser.cc program.cc)
 target_link_libraries(bmc ${MATHSAT_LIBRARY} ${GMP_LIBRARY} sexpr)
 SET(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wno-sign-compare")
 

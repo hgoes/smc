@@ -12,6 +12,7 @@ public:
   std::vector<sexp_t*> inits;
   std::vector<sexp_t*> trans;
   std::vector<sexp_t*> props;
+  std::vector<sexp_t*> preds;
   Program(sexp_t* expr);
   Program(int fd);
 };

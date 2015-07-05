@@ -13,7 +13,7 @@ public:
   typedef msat_decl decl;
   typedef int interp_group;
   class model_iterator;
-  IMathSAT(const char* logic);
+  IMathSAT(const char* logic, bool interpolation=true);
   ~IMathSAT();
   type bool_type();
   type int_type();

@@ -2,10 +2,13 @@
 
 #include <iostream>
 
-IMathSAT::IMathSAT(const char* logic) {
+IMathSAT::IMathSAT(const char* logic, bool interpolation) {
   cfg = msat_create_default_config(logic);
   msat_set_option(cfg, "model_generation", "true");
-  msat_set_option(cfg, "interpolation", "true");
+  if(interpolation) {
+    msat_set_option(cfg, "interpolation", "true");
+  }
+  msat_set_option(cfg, "debug.api_call_trace", "1");
   env = msat_create_env(cfg);
 }
 
