@@ -8,3 +8,6 @@
 # targets
 /bmc
 /libsexpr.a
+
+# backup files
+*~
