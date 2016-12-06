@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.6)
-project(SMC2015)
+project(SMC)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/Modules/")
 
 find_package(MathSAT REQUIRED)
@@ -16,8 +16,8 @@ add_library(sexpr
   sexpr-1.3/src/sexp_memory.c
   sexpr-1.3/src/event_temp.c)
 
-add_executable(bmc main.cc pred_abs_exercise.cc bmc_exercise.cc mathsat_interface.cc parser.cc program.cc)
-target_link_libraries(bmc ${MATHSAT_LIBRARY} ${GMP_LIBRARY} sexpr)
+add_executable(smc main.cc pred_abs_exercise.cc bmc_exercise.cc mathsat_interface.cc parser.cc program.cc)
+target_link_libraries(smc ${MATHSAT_LIBRARY} ${GMP_LIBRARY} sexpr)
 SET(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wno-sign-compare")
 
 include_directories(${MATHSAT_INCLUDE_DIR})
