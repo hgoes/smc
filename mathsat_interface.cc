@@ -8,7 +8,7 @@ IMathSAT::IMathSAT(const char* logic, bool interpolation) {
   if(interpolation) {
     msat_set_option(cfg, "interpolation", "true");
   }
-  msat_set_option(cfg, "debug.api_call_trace", "1");
+  msat_set_option(cfg, "debug.api_call_trace", "0");
   env = msat_create_env(cfg);
 }
 
