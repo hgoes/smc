@@ -11,7 +11,8 @@
 enum check_result {
   COMPLETE,   // A fixpoint has been found so we know the BMC instance covers all reachable states
   INCOMPLETE, // No bug was found, but the instance doesn't cover all reachable states
-  NEW_APPROX  // A new approximation of the set of reachable states has been found
+  NEW_APPROX,  // A new approximation of the set of reachable states has been found
+  UNIMPLEMENTED // The function hasn't been implemented yet
 };
 
 class BMC {

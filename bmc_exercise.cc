@@ -24,5 +24,5 @@ bool BMC::check() {
 }
 
 check_result BMC::check(IMathSAT::term* reach,IMathSAT::term* new_reach) {
-  return INCOMPLETE;
+  return UNIMPLEMENTED;
 }

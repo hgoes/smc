@@ -49,8 +49,8 @@ int main(int argc,char* argv[]) {
 	IMathSAT::term reach;
 	IMathSAT::term new_reach;
 	bmc.extend();
-	if(bmc.check(nullptr,&reach)==INCOMPLETE) {
-	  std::cout << "Error found." << std::endl;
+	if(bmc.check(nullptr,&reach)==UNIMPLEMENTED) {
+	  std::cout << "No error found." << std::endl;
 	  return 1;
 	}
 	std::cout << "No error found." << std::endl;
